@@ -68,6 +68,7 @@
 \usepackage{empheq}
 
 \usepackage{sectsty}
+\usepackage{subcaption}
 
 \newcommand*\wfbox[1]{\fbox{\hspace{0.4em}#1\hspace{0.4em}}}
 
@@ -111,7 +112,31 @@
     In this problem we derive an expression for the longitudinal speed of sound in a homogeneous isotropic elastic solid by modelling the solid as a three-dimensional cubic lattice. We first determine the speed of sound in terms of microscopic parameters of the material; subsequently we shall express the speed of sound in macroscopic material properties. For simplicity, we consider the case of a rectangular prism.
 
     \subsubsection*{Part I}
-    TODO
+    Consider a solid rectangular prism of dimensions $a \times b \times c$ at rest. We tie our inertial reference frame to a corner of the prism with axes along those of the prism as shown in \textbf{Figure~\ref{fig:I1}}.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.8]{images/i1.jpg}
+        \caption{Sketch of the solid prism and our inertial reference frame for \textbf{Part I}. The solid is of side lengths $a$, $b$, and $c$ along the $x$-, $y$-, and $z$-axes, respectively.}
+        \label{fig:I1}
+    \end{figure}
+    We may model this solid prism as a $M \times N \times P$ cubic lattice of point masses, each with mass $m$. These point masses represent the solid's atoms. This is illustrated in \textbf{Figure~\ref{fig:I2}}.
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.6\textwidth}
+            \includegraphics[width=\textwidth]{images/I2.jpg}
+            \caption{}
+            \label{fig:I2}
+        \end{subfigure}
+        \quad
+        \begin{subfigure}[b]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{images/I3.jpg}
+            \caption{}
+            \label{fig:I3}
+        \end{subfigure}
+        \caption{(a) Sketch of the crystal lattice projected on the $xy$-plane. The black dots represent atoms; each atom in the lattice is spaced out by a distance $l_0$ at equilibrium. In total there are $M$, $N$, and $P$ atoms along the $x$-, $y$-, and $z$-axes, respectively. Although this is not depicted, this lattice repeats similarly along the $z$-axis. (b) Sketch of the interaction between an interior atom (square) and its six neighbours (circles). This interaction is modelled as a spring of equilibrium length $l_0$ and spring constant $k$. It follows that these springs lie along the $x$-, $y$-, and $z$-axes (two on each).}
+    \end{figure}
+    The bond potential energy between two adjacent atoms experiences a local minimum at an equilibrium length $l_0$. Applying the small oscillations approximation to this stable equilibrium, we model the interaction between two adjacent atoms as a harmonic oscillator (i.e. spring) of equilibrium displacement $l_0$ and spring constant $k$. Furthermore, we take the interaction between non-adjacent atoms to be negligible. This is depicted in \textbf{Figure~\ref{fig:I3}}. Finally, we neglect gravity throughout this problem.\newline\newline
+    To get started, how many degrees of freedom in this system? What set of generalized coordinates could you use to describe this system?
 
 \end{flushleft}
 
