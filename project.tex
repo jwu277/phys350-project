@@ -1,0 +1,118 @@
+%% Standard start of a latex document
+\documentclass[letterpaper,12pt]{article}
+%% Always use 12pt - it is much easier to read
+%% Things written after '%' sign, are ignored by the latex editor - they are how to introduce comments into your .tex source
+%% Anything mathematics related should be put in between '$' signs.
+
+%% Set some names and numbers here so we can use them below
+\newcommand{\name}{James Wu} %%%%%%%%%%%%%%% ---------> Change this to your name
+\newcommand{\studentnumber}{92277235} %%%%%%%%%%%%%%% ---------> Change this to your student number
+\newcommand{\hwnum}{4} %%%%%%%%%%%%%%% --------->  set this to the homework number
+
+%%%%%%
+%% There is a bit of stuff below which you should not have to change
+%%%%%%
+
+%% AMS mathematics packages - they contain many useful fonts and symbols.
+\usepackage{amsmath, amsfonts, amssymb, bm}
+
+%% The geometry package changes the margins to use more of the page, I suggest
+%% using it because standard latex margins are chosen for articles and letters,
+%% not homework.
+\usepackage[paper=letterpaper,left=25mm,right=25mm,top=30mm,bottom=30mm]{geometry}
+%% For details of how this package work, google the ``latex geometry documentation''.
+
+%% Fancy headers and footers - make the document look nice
+\usepackage{fancyhdr} %% for details on how this work, search-engine ``fancyhdr documentation''
+\pagestyle{fancy}
+
+\usepackage{graphicx}
+
+\setlength{\headheight}{15pt}
+
+%% The header
+\chead{PHYS 350: Speed of Sound in a Solid} % homework number in top-centre
+
+%% The footer
+\cfoot{Page \thepage} % page in middle
+
+%% These put horizontal lines between the main text and header and footer.
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%
+
+%%%%%%
+%% The above stuff is the same as the first template, but now we are starting to prove things, so we'd like to have a
+%% good proof environment that gives us nice formatting and a little square at the end.
+%% We'd also like a nice Result environment that prints that up nicely too.
+%% Thankfully this exists in latex in the amsthm package
+\usepackage{amsthm}
+\newtheorem*{thm}{Theorem}
+%% This creates a new theorem-like environment called "result", that will be titled "Result".
+%% See below for examples of how to use this.
+%%%%%%
+\usepackage{enumitem}
+%% This package allows us to make nice ordered lists with numbers, letters or roman numerals
+
+\usepackage{titlesec}
+\titlespacing*{\subsection}{0pt}{0pt}{3.0ex}
+\titlespacing*{\subsubsection}{0pt}{3.0ex}{0.5ex}
+
+\usepackage[hang,flushmargin]{footmisc}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\allowdisplaybreaks
+
+\usepackage{empheq}
+
+\usepackage{sectsty}
+
+\newcommand*\wfbox[1]{\fbox{\hspace{0.4em}#1\hspace{0.4em}}}
+
+%% Useful commands
+\renewcommand*{\qed}{\hfill\ensuremath{\square}}
+
+\newcommand*{\uvec}[1]{\hat{\bm{#1}}}
+
+\newcommand*{\deriv}[2]{\frac{d #1}{d #2}}
+\newcommand*{\pderiv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand*{\nderiv}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand*{\npderiv}[3]{\frac{\partial^{#3} #1}{\partial #2^{#3}}}
+\newcommand*{\divg}[1]{\nabla \cdot \mathbf{#1}}
+
+\newcommand*{\abs}[1]{\left| #1 \right|}
+\newcommand*{\norm}[1]{\abs{\abs{\mathbf{#1}}}}
+
+\newcommand*{\ev}[1]{\left<#1\right>}
+
+\renewcommand*{\Re}[1]{\text{Re}\left(#1\right)}
+\renewcommand*{\Im}[1]{\text{Im}\left(#1\right)}
+
+\newcommand*{\qimg}[2]{\\ \begin{center}\includegraphics[scale=#1]{#2}\end{center}}
+
+\newcommand*{\Arg}[1]{\text{Arg}\left(#1\right)}
+
+\newcommand*{\Log}[1]{\text{Log}\left(#1\right)}
+
+%%
+
+\begin{document}
+
+\begin{center}
+    \subsection*{Speed of Sound in a Solid with Lagrangian Mechanics}
+    James Wu, \quad 92277235
+\end{center}
+
+\begin{flushleft}
+
+    \subsubsection*{Introduction}
+    Foo
+
+    \subsubsection*{Part I}
+    TODO
+
+\end{flushleft}
+
+\end{document}
