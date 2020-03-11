@@ -112,7 +112,7 @@
     In this problem we derive an expression for the longitudinal speed of sound in a homogeneous isotropic elastic solid by modelling the solid as a three-dimensional cubic lattice. We first determine the speed of sound in terms of microscopic parameters of the material; subsequently we shall express the speed of sound in macroscopic material properties. For simplicity, we consider the case of a rectangular prism.
 
     \subsubsection*{Part I}
-    Consider a solid rectangular prism of dimensions $a \times b \times c$ at rest. We tie our inertial reference frame to a corner of the prism with axes along those of the prism as shown in \textbf{Figure~\ref{fig:I1}}.
+    Consider a solid rectangular prism of dimensions $a \times b \times c$ at rest. We tie our inertial reference frame to a corner of the prism with axes along those of the prism as shown in \textbf{Figure~\ref{fig:I1}} (so more precisely, we require this corner to be at rest).
     \begin{figure}[h]
         \centering
         \includegraphics[scale=0.8]{images/i1.jpg}
@@ -146,7 +146,24 @@
     We similarly may denote the (current) $x$, $y$, and $z$ positions of the $(i, j, k)$ particle as $x_{ijk}$, $y_{ijk}$, and $z_{ijk}$, respectively. In terms of these coordinates, find the total kinetic and potential energies of the system. What is the Lagrangian?
 
     \subsubsection*{Part IV}
-    Find the Euler-Lagrange equations for the $(i, j, k)$ interior atom ($2 \leq i \leq M-1$, $2 \leq j \leq N-1$, $2 \leq k \leq P-1$) i.e. for $x_{ijk}$, $y_{ijk}$, and $z_{ijk}$.
+    Find the Euler-Lagrange equations for the $(i, j, k)$ interior atom ($2 \leq i \leq M-1$, $2 \leq j \leq N-1$, $2 \leq k \leq P-1$). For simplicity, find the EL equations only for $x_{ijk}$ (the equations for $y_{ijk}$ and $z_{ijk}$ are then determined by symmetry). We will consider the boundary atoms later.
+
+    \subsubsection*{Part V}
+    Now let us consider longitudinal acoustic wave (sound) propogation along the $x$-axis. That is, we consider wave propogation where $y_{ijk}$ and $z_{ijk}$ are not displaced from their equilibrium values. For example, we could have a hammer uniformly striking the $yz$ face of the prism opposite to the origin. The longitudinal wave propogation is therefore described by the longitudinal displacement (from equilibrium) $X_{ijk}$ of point $(i, j, k)$: $X_{ijk} = x_{ijk} - \tilde{x}_{ijk}$. We are focusing on the case where external acoustic stimuli are applied uniformly along $j$ and $k$ so that $X_{ijk}$ is constant in $j$ and $k$.\newline\newline
+    Rewrite the $x$ EL equations in terms of $X$, applying the simplification that $y_{ijk}$ and $z_{ijk}$ are not displaced. Also show that $\ddot{y}_{ijk}$ and $\ddot{z}_{ijk}$ are equal to zero in the EL equations (this ensures that if the system starts with $y_{ijk}$ and $z_{ijk}$ at rest for all $(i, j, k)$, $y_{ijk}$ and $z_{ijk}$ will remain unperturbed).
+
+    \subsubsection*{Part VI}
+    Turning now to the theory of finite differences, we may approximate the derivatives of a twice continuously differentiable function $f(x)$ in a mesh as
+    $$\deriv{f}{x}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) - f(x_i)}{\Delta x}, \; \nderiv{f}{x}{2}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) + f(x_{i-1}) - 2f(x_i)}{\left(\Delta x\right)^2}$$
+    for a given mesh size of $\Delta x$. We will make use of the first approximation later. Of course, these finite differences have analogous formulae for partial derivatives.\newline\newline
+    Let us now concern ourselves with somehow differentiating $X_{ijk}$. As it stands, this is not a function of $x$, $y$, and $z$, which we would like it to be. But notice that in analyzing a macroscopic solid, $M$, $N$, and $P$ are very large. Taking inspiration from fluid mechanics, however, we then define a cubic volume element to be small enough so that the prism can be decomposed into a large number of such elements, yet large enough to contain a large number of atoms. Then we can define a function $\tilde{X}(x, y, z, t)$ to be the average value of $X(t)$ for all the point masses inside the cubic volume element (whose sides run along the coordinate axes) centred at the point $(x, y, z)$.\newline\newline
+    Observe that the EL equations for $X$ can be massaged into a finite set of finite difference equations for $\tilde{X}(x, y, z, t)$. Perform this manipulation.
+
+    \subsubsection*{Part VII}
+    As one of the most important equations in physics, the wave equation is
+    $$\npderiv{f}{t}{2} = c^2 \nabla^2 f$$
+    This represents the propogation of a quantity $f$ through space. The constant $c$ is known as the \textit{wave speed}; this represents the speed at which $f$ propogates through space. Notice that the set of equations obtained in \textbf{Part VI} is a \textit{pseudo}-discretization of the wave equation for $\tilde{X}$.\newline\newline
+    ``Undiscretize'' these equations to recover the wave equation for $\tilde{X}$. Find the wave speed $c$ in terms of the quantities we have encountered thus far. The equations in \textbf{Part VI} represent a \textit{pseudo}-discretization of the wave equation; in fact, this is better than a typical finite difference discretization. Why is this the case (recall that finite difference discretizations are used to numerically compute the solutions to differential equations)?
 
 \end{flushleft}
 
