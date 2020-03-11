@@ -150,7 +150,7 @@
 
     \subsubsection*{Part V}
     Now let us consider longitudinal acoustic wave (sound) propogation along the $x$-axis. That is, we consider wave propogation where $y_{ijk}$ and $z_{ijk}$ are not displaced from their equilibrium values. For example, we could have a hammer uniformly striking the $yz$ face of the prism opposite to the origin. The longitudinal wave propogation is therefore described by the longitudinal displacement (from equilibrium) $X_{ijk}$ of point $(i, j, k)$: $X_{ijk} = x_{ijk} - \tilde{x}_{ijk}$. We are focusing on the case where external acoustic stimuli are applied uniformly along $j$ and $k$ so that $X_{ijk}$ is constant in $j$ and $k$.\newline\newline
-    Rewrite the $x$ EL equations in terms of $X$, applying the simplification that $y_{ijk}$ and $z_{ijk}$ are not displaced. Also show that $\ddot{y}_{ijk}$ and $\ddot{z}_{ijk}$ are equal to zero in the EL equations (this ensures that if the system starts with $y_{ijk}$ and $z_{ijk}$ at rest for all $(i, j, k)$, $y_{ijk}$ and $z_{ijk}$ will remain unperturbed).
+    Simplify the $x$ EL equations, applying the simplification that $y_{ijk}$ and $z_{ijk}$ are not displaced. Rewrite these equations in terms of $X$. Also show that $\ddot{y}_{ijk}$ and $\ddot{z}_{ijk}$ are equal to zero in the EL equations (this ensures that if the system starts with $y_{ijk}$ and $z_{ijk}$ at rest for all $(i, j, k)$, $y_{ijk}$ and $z_{ijk}$ will remain unperturbed).
 
     \subsubsection*{Part VI}
     Turning now to the theory of finite differences, we may approximate the derivatives of a twice continuously differentiable function $f(x)$ in a mesh as
@@ -164,6 +164,10 @@
     $$\npderiv{f}{t}{2} = c^2 \nabla^2 f$$
     This represents the propogation of a quantity $f$ through space. The constant $c$ is known as the \textit{wave speed}; this represents the speed at which $f$ propogates through space. Notice that the set of equations obtained in \textbf{Part VI} is a \textit{pseudo}-discretization of the wave equation for $\tilde{X}$.\newline\newline
     ``Undiscretize'' these equations to recover the wave equation for $\tilde{X}$. Find the wave speed $c$ in terms of the quantities we have encountered thus far. The equations in \textbf{Part VI} represent a \textit{pseudo}-discretization of the wave equation; in fact, this is better than a typical finite difference discretization. Why is this the case (recall that finite difference discretizations are used to numerically compute the solutions to differential equations)?
+
+    \subsubsection*{Part VIII}
+    Let us take a detour now to the mechanics of materials. Consider a uniaxial deformation of the prism where the $yz$-face opposite to the origin is displaced by an amount $\delta$. In terms of generalized coordinates, we now constrain $x_{Mjk} = a + \delta$ for all $1 \leq j \leq N, 1 \leq k \leq P$ under the deformation. If initially the system was at rest (with no contraint on $x_{Mjk}$), and we take the system after the displacement to be at rest (this could be in steady state, where the oscillations of the atoms have been damped; for sound propogation we have neglected damping), then the \textit{elastic modulus} $E$ is defined to be the constant of proportionality such that the increase in energy per total (initial) volume is $\frac{1}{2}E\varepsilon^2$, where $\varepsilon = \frac{\delta}{a}$ is known as the \textit{strain} of the deformation (the elastic modulus is more commonly defined in terms of forces; in the context of Lagrangian mechanics, however, we shall continue to formulate phenomena in terms of generalized coordinates and energies). Finally, the density $\rho$ of a material is its mass per unit volume.\newline\newline
+    Express the speed of sound $c$ in the solid in terms of its macroscopic properties.
 
 \end{flushleft}
 
