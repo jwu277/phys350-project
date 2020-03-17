@@ -108,7 +108,7 @@
 \begin{flushleft}
 
     \subsubsection*{Introduction}
-    In this problem we derive an expression for the longitudinal speed of sound in a homogeneous isotropic elastic solid by modelling the solid as a three-dimensional cubic lattice. We first determine the speed of sound in terms of microscopic parameters of the material; subsequently we shall express the speed of sound in macroscopic material properties. For simplicity, we consider the case of a rectangular prism.
+    In this problem we derive an expression for the longitudinal speed of sound in a homogeneous isotropic elastic solid by modelling the solid as a three-dimensional cubic lattice. We first determine the speed of sound in terms of microscopic parameters of the material; subsequently we shall express the speed of sound in macroscopic material properties. For simplicity, we consider the case of a rectangular prism. Note that the oscillations of atoms about equilibrium will be small compared to the bond length (this is not a small oscillations problem, however).
 
     \subsubsection*{Part I}
     Consider a solid rectangular prism of dimensions $a \times b \times c$ at rest. We tie our inertial reference frame to a corner of the prism with axes along those of the prism as shown in \textbf{Figure~\ref{fig:I1}} (so more precisely, we require this corner to be at rest).
@@ -157,7 +157,7 @@
     $$\deriv{f}{x}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) - f(x_i)}{\Delta x}, \; \nderiv{f}{x}{2}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) + f(x_{i-1}) - 2f(x_i)}{\left(\Delta x\right)^2}$$
     for a given mesh size of $\Delta x$. We (you) will make use of the first approximation later. Of course, these finite differences have analogous formulae for partial derivatives.\newline\newline
     Let us now concern ourselves with somehow differentiating $X_{ijk}$. As it stands, the equations appear to be finite difference equations, however $X_{ijk}$ this is not a function of $x$, $y$, and $z$. However, $X_{ijk}(t)$ is a discretization of some twice differentiable function $\tilde{X}(x, y, z, t)$, where the EL equations serve as the difference equations. We may interpret $X_{ijk}$ to be $\tilde{X}$ evaluated at the point where the $(i, j, k)$ atom's equilibrium location is. Because there are a very large number of atoms along each dimension in a macroscopic solid, the finite difference discretization is very accurate; that is, the values of $X_{ijk}$ will be approximately equal the actual values of $\tilde{X}$ (which is governed by the corresponding differential equation) evaluated at those points.\newline\newline
-    Express the equations obtained in \textbf{Part V} as a set of finite difference equations for $\tilde{X}$. What should the mesh spacing $\Delta x$ be?
+    Express the equations for the interior points obtained in \textbf{Part V} as a set of finite difference equations for $\tilde{X}$. What should the mesh spacing $\Delta x$ be?
 
     \subsubsection*{Part VII}
     As one of the most important equations in physics, the wave equation is

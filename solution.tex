@@ -194,14 +194,42 @@
     \end{empheq}
 
     \subsubsection*{Part V}
-    TODO
+    At $t=0$, we have $y_{ijk} = jl_0$ and $z_{ijk} = kl_0$. Consequently, $y_{ijk}$ is invariant in $i$ and $k$, while $z_{ijk}$ is invariant in $i$ and $j$. This means that for $m > n$
+    \begin{align*}
+        \sqrt{(x_{mjk} - x_{njk})^2 + (y_{mjk} - y_{njk})^2 + (z_{mjk} - z_{njk})^2} &= \abs{x_{mjk} - x_{njk}} = x_{mjk} - x_{njk} \\
+        \sqrt{(x_{imk} - x_{ink})^2 + (y_{imk} - y_{ink})^2 + (z_{imk} - z_{ink})^2} &= \abs{y_{imk} - y_{ink}} = y_{imk} - y_{ink} = (m-n)l_0 \\
+        \sqrt{(x_{ijm} - x_{ijn})^2 + (y_{ijm} - y_{ijn})^2 + (z_{ijm} - z_{ijn})^2} &= \abs{z_{ijm} - z_{ijn}} = z_{ijm} - z_{ijn} = (m-n)l_0
+    \end{align*}
+    The absolute values resolve given that the oscillations about equilibrium points are assumed to be small; the spatial order of the atoms will therefore be preserved. Then
+    $$(y_{i+1,j,k} - y_{ijk}) - \lambda^y_{i:i+1,i}l_0 = 0 - 0 = 0$$
+    $$(y_{i,j+1,k} - y_{ijk}) - \lambda^y_{j:j+1,j}l_0 = l_0 - \frac{l_0}{l_0}l_0 = 0$$
+    Similar calculations to the first equation can be done for the $k$ index to yield zero (for $i:i,i-1$ we simply shift the index). Adding terms together, this gives $m\ddot{y}_{ijk} = 0$ and so $\ddot{y}_{ijk} = 0$ at $t = 0$. By symmetry, we must have $\ddot{z}_{ijk} = 0$ initially.\qed\\
+    We can also perform similar calculations for the terms replacing the $j$ and $k$ indices in the $x_{ijk}$ equation as we did for the term in the $y_{ijk}$ equation with $i:i+1,i$ to obtain zero. Meanwhile,
+    $$\lambda_{i:i+1,i}^x = \frac{x_{i+1,j,k} - x_{ijk}}{\sqrt{(x_{i+1,j,k} - x_{ijk})^2}} = 1$$
+    noting that the absolute value resolves. Shifting indices to apply this to $i:i,i-1$, we now attain
+    $$m\ddot{x}_{ijk} = K\left((x_{i+1,j,k} - x_{ijk}) - l_0\right)\delta'_{i,M-1} - K\left((x_{ijk} - x_{i-1,j,k}) - l_0\right)\delta'_{i,0}$$
+    At initial conditions, we reduce $x_{ijk} \mapsto x_i$ seeing that the $x_{ijk}$ is independent of $j$ and $k$. Then
+    $$m\ddot{x}_{ijk} = K\left((x_{i+1} - x_{i}) - l_0\right)\delta'_{i,M-1} - K\left((x_{i} - x_{i-1}) - l_0\right)\delta'_{i,0}$$
+    Seeing that the right-hand side is independent of $j$ and $k$ (and so is $m$), we have demonstrated that $\ddot{x}_{ijk}$ is independent of $j$ and $k$ (at initial conditions).\qed\\
+    Indexing with $i$, we know have
+    \begin{align*}
+        m\ddot{x}_{i} &= K\left((x_{i+1} - x_{i}) - l_0\right)\delta'_{i,M-1} - K\left((x_{i} - x_{i-1}) - l_0\right)\delta'_{i,0}
+    \end{align*}
+    For $1 \leq i \leq M-2$ this simplifies to
+    $$m\ddot{x}_i = K\left((x_{i+1} - x_{i}) - l_0\right) - K\left((x_{i} - x_{i-1}) - l_0\right) = K\left(x_{i+1} + x_{i-1} - 2x_i\right)$$
+    $$\boxed{m\ddot{x}_i = K\left(x_{i+1} + x_{i-1} - 2x_i\right), \: 1 \leq i \leq M-2}$$
+    As for $i = M-1$,
+    $$\boxed{m\ddot{x}_{M-1} = -K\left((x_{M-1} - x_{M-2}) - l_0\right)}$$
+    Note that $x_0$ is no longer a degree of freedom.\\
+    Finally, note that $x_i = X_i + il_0$ and $\ddot{X}_i = \ddot{x}_i$. Then for $1 \leq i \leq M-2$,
+    $$m\ddot{X}_i = K\left(X_{i+1} + (i+1)l_0 + X_{i-1} + (i-1)l_0 - 2\left(X_i + il_0\right)\right) = K\left(X_{i+1} + X_{i-1} - 2X_i\right)$$
+    $$\boxed{m\ddot{X}_i = K\left(X_{i+1} + X_{i-1} - 2X_i\right), \: 1 \leq i \leq M-2}$$
+    And for $i = M-1$
+    $$m\ddot{X}_{M-1} = -K\left((X_{M-1} + (M-1)l_0 - X_{M-2} - (M-2)l_0) - l_0\right)$$
+    $$\boxed{m\ddot{X}_{M-1} = -K\left(X_{M-1} - X_{M-2}\right)}$$
 
     \subsubsection*{Part VI}
-    Turning now to the theory of finite differences, we may approximate the derivatives of a twice continuously differentiable function $f(x)$ in a mesh as
-    $$\deriv{f}{x}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) - f(x_i)}{\Delta x}, \; \nderiv{f}{x}{2}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) + f(x_{i-1}) - 2f(x_i)}{\left(\Delta x\right)^2}$$
-    for a given mesh size of $\Delta x$. We (you) will make use of the first approximation later. Of course, these finite differences have analogous formulae for partial derivatives.\newline\newline
-    Let us now concern ourselves with somehow differentiating $X_{ijk}$. As it stands, the equations appear to be finite difference equations, however $X_{ijk}$ this is not a function of $x$, $y$, and $z$. However, $X_{ijk}(t)$ is a discretization of some twice differentiable function $\tilde{X}(x, y, z, t)$, where the EL equations serve as the difference equations. We may interpret $X_{ijk}$ to be $\tilde{X}$ evaluated at the point where the $(i, j, k)$ atom's equilibrium location is. Because there are a very large number of atoms along each dimension in a macroscopic solid, the finite difference discretization is very accurate; that is, the values of $X_{ijk}$ will be approximately equal the actual values of $\tilde{X}$ (which is governed by the corresponding differential equation) evaluated at those points.\newline\newline
-    Express the equations obtained in \textbf{Part V} as a set of finite difference equations for $\tilde{X}$. What should the mesh spacing $\Delta x$ be?
+    For the interior points,
 
     \subsubsection*{Part VII}
     As one of the most important equations in physics, the wave equation is
