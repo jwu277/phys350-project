@@ -145,6 +145,19 @@
         &- \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-2}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2 \\
         &- \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2
     \end{empheq}
+    As we will see in \textbf{Part IV}, $\pderiv{\mathcal{L}}{x_{ijk}} = m\dot{x}_{ijk}$, $\pderiv{\mathcal{L}}{y_{ijk}} = m\dot{y}_{ijk}$, and $\pderiv{\mathcal{L}}{z_{ijk}} = m\dot{z}_{ijk}$ are in general nonzero. Hence momenta are generally not conserved in this system. However, notice that the Lagrangian is time invariant: $\pderiv{\mathcal{L}}{t} = 0$. Thus energy is conserved.
+    \begin{align*}
+        E &= \mathcal{L} - \sum_{(i,j,k) \neq (0,0,0)} \left(\dot{x}_{ijk}\pderiv{\mathcal{L}}{\dot{x}_{ijk}} + \dot{y}_{ijk}\pderiv{\mathcal{L}}{\dot{y}_{ijk}} + \dot{z}_{ijk}\pderiv{\mathcal{L}}{\dot{z}_{ijk}}\right) \\
+        &= \mathcal{L} - \sum_{(i,j,k) \neq (0,0,0)} \left(m\dot{x}_{ijk}^2 + m\dot{y}_{ijk}^2 + m\dot{z}_{ijk}^2\right) \\
+        &= \mathcal{L} - m\sum \left(\dot{x}_{ijk}^2 + \dot{y}_{ijk}^2 + \dot{z}_{ijk}^2\right)
+    \end{align*}
+    In going to the last step, we leveraged the fact that $\dot{x}_{000} = \dot{y}_{000} = \dot{z}_{000} = 0$. Hence
+    \begin{empheq}[box=\wfbox]{align*}
+        E &= \frac{m}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\dot{x}_{ijk}^2 + \dot{y}_{ijk}^2 + \dot{z}_{ijk}^2\right) \\
+        &+ \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2 \\
+        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-2}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2 \\
+        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2
+    \end{empheq}
 
     \subsubsection*{Part IV}
     For convenience, let us introduce the antidelta
@@ -181,8 +194,7 @@
     \end{empheq}
 
     \subsubsection*{Part V}
-    Now let us consider longitudinal acoustic wave (sound) propagation along the $x$-axis. That is, we consider wave propagation where $y_{ijk}$ and $z_{ijk}$ are not displaced from their equilibrium values. For example, we could have a hammer uniformly striking the $yz$ face of the prism opposite to the origin. The longitudinal wave propagation is therefore described by the longitudinal displacement (from equilibrium) $X_{ijk}$ of point $(i, j, k)$: $X_{ijk} = x_{ijk} - \tilde{x}_{ijk}$. We are focusing on the case where external acoustic stimuli are applied uniformly along $j$ and $k$ so that $X_{ijk}$ is constant in $j$ and $k$.\newline\newline
-    Simplify the $x$ EL equations, applying the simplification that $y_{ijk}$ and $z_{ijk}$ are not displaced. Rewrite these equations in terms of $X$. Also show that $\ddot{y}_{ijk}$ and $\ddot{z}_{ijk}$ are equal to zero in the EL equations (this ensures that if the system starts with $y_{ijk}$ and $z_{ijk}$ at rest for all $(i, j, k)$, $y_{ijk}$ and $z_{ijk}$ will remain unperturbed).
+    TODO
 
     \subsubsection*{Part VI}
     Turning now to the theory of finite differences, we may approximate the derivatives of a twice continuously differentiable function $f(x)$ in a mesh as
