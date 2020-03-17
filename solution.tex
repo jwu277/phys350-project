@@ -1,0 +1,218 @@
+%% Standard start of a latex document
+\documentclass[letterpaper,12pt]{article}
+%% Always use 12pt - it is much easier to read
+%% Things written after '%' sign, are ignored by the latex editor - they are how to introduce comments into your .tex source
+%% Anything mathematics related should be put in between '$' signs.
+
+%% Set some names and numbers here so we can use them below
+\newcommand{\name}{James Wu} %%%%%%%%%%%%%%% ---------> Change this to your name
+\newcommand{\studentnumber}{92277235} %%%%%%%%%%%%%%% ---------> Change this to your student number
+
+%%%%%%
+%% There is a bit of stuff below which you should not have to change
+%%%%%%
+
+%% AMS mathematics packages - they contain many useful fonts and symbols.
+\usepackage{amsmath, amsfonts, amssymb, bm}
+
+%% The geometry package changes the margins to use more of the page, I suggest
+%% using it because standard latex margins are chosen for articles and letters,
+%% not homework.
+\usepackage[paper=letterpaper,left=25mm,right=25mm,top=30mm,bottom=30mm]{geometry}
+%% For details of how this package work, google the ``latex geometry documentation''.
+
+%% Fancy headers and footers - make the document look nice
+\usepackage{fancyhdr} %% for details on how this work, search-engine ``fancyhdr documentation''
+\pagestyle{fancy}
+
+\usepackage{graphicx}
+
+\setlength{\headheight}{15pt}
+
+%% The header
+\chead{PHYS 350: Speed of Sound in a Solid} % homework number in top-centre
+
+%% The footer
+\cfoot{Page \thepage} % page in middle
+
+%% These put horizontal lines between the main text and header and footer.
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%%
+
+%%%%%%
+%% The above stuff is the same as the first template, but now we are starting to prove things, so we'd like to have a
+%% good proof environment that gives us nice formatting and a little square at the end.
+%% We'd also like a nice Result environment that prints that up nicely too.
+%% Thankfully this exists in latex in the amsthm package
+\usepackage{amsthm}
+\newtheorem*{thm}{Theorem}
+%% This creates a new theorem-like environment called "result", that will be titled "Result".
+%% See below for examples of how to use this.
+%%%%%%
+\usepackage{enumitem}
+%% This package allows us to make nice ordered lists with numbers, letters or roman numerals
+
+\usepackage{titlesec}
+\titlespacing*{\subsection}{0pt}{0pt}{3.0ex}
+\titlespacing*{\subsubsection}{0pt}{3.0ex}{0.5ex}
+
+\usepackage[hang,flushmargin]{footmisc}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\allowdisplaybreaks
+
+\usepackage{empheq}
+
+\usepackage{sectsty}
+\usepackage{subcaption}
+
+\newcommand*\wfbox[1]{\fbox{\hspace{0.4em}#1\hspace{0.4em}}}
+
+%% Useful commands
+\renewcommand*{\qed}{\hfill\ensuremath{\square}}
+
+\newcommand*{\uvec}[1]{\hat{\bm{#1}}}
+
+\newcommand*{\deriv}[2]{\frac{d #1}{d #2}}
+\newcommand*{\pderiv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand*{\nderiv}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand*{\npderiv}[3]{\frac{\partial^{#3} #1}{\partial #2^{#3}}}
+\newcommand*{\divg}[1]{\nabla \cdot \mathbf{#1}}
+
+\newcommand*{\abs}[1]{\left| #1 \right|}
+\newcommand*{\norm}[1]{\abs{\abs{\mathbf{#1}}}}
+
+\newcommand*{\ev}[1]{\left<#1\right>}
+
+\renewcommand*{\Re}[1]{\text{Re}\left(#1\right)}
+\renewcommand*{\Im}[1]{\text{Im}\left(#1\right)}
+
+\newcommand*{\qimg}[2]{\\ \begin{center}\includegraphics[scale=#1]{#2}\end{center}}
+
+\newcommand*{\Arg}[1]{\text{Arg}\left(#1\right)}
+
+\newcommand*{\Log}[1]{\text{Log}\left(#1\right)}
+
+%%
+
+\begin{document}
+
+\begin{center}
+    \subsection*{Solution: Speed of Sound in a Solid with Lagrangian Mechanics}
+    James Wu, \quad 92277235
+\end{center}
+
+\begin{flushleft}
+
+    \subsubsection*{Part I}
+    There are $MNP$ atoms in this system. Each atom, being modelled as a point particle, has 3 degrees of freedom. However, we must subtract the atom at the origin, as we have constrained it to be fixed. Thus
+    $$\boxed{s = 3(MNP - 1)}$$
+    We can use the $x$, $y$, and $z$ coordinates of each particle to describe the particle's motion. Our generalized coordinates are then
+    $$\boxed{\left(x_{ijk}, y_{ijk}, z_{ijk}\right), \: (0,0,0) \leq (i,j,k) \leq (M-1, N-1, P-1), (i,j,k) \neq (0,0,0)}$$
+    where we index the atoms with $i$, $j$, and $k$ along the $x$-, $y$-, and $z$-axes, respectively.
+
+    \subsubsection*{Part II}
+    The equilibrium position of atom $(i,j,k)$ is
+    $$\boxed{\left(\tilde{x}_{ijk}, \tilde{y}_{ijk}, \tilde{z}_{ijk}\right) = \left(il_0, jl_0, kl_0\right)}$$
+    If we take the prism to be bounded by the point atoms, then the dimensions would be $(a,b,c) = ((M-1)l_0,(N-1)l_0,(P-1)l_0)$. Quasi-philosophically, we could, however, argue that the prism extends a bit beyond the boundary atoms; no external body can be pushed right against the boundary atoms as that would require an infinite amount of energy (the bond energy diverges to infinity as bond distance approaches zero). Regardless, this all occurs on the $l_0$ scale, which is small compared to the $(a,b,c)$ scale. Hence we simply assert
+    $$\boxed{(a,b,c) \approx (Ml_0,Nl_0,Pl_0)}$$
+
+    \subsubsection*{Part III}
+    The kinetic energy of particle $(i,j,k)$ is simply
+    $$T_{ijk} = \frac{m}{2}\left(\dot{x}_{ijk}^2 + \dot{y}_{ijk}^2 + \dot{z}_{ijk}^2\right)$$
+    For the case $i=j=k=0$, we simply have $\dot{x}_{000} = \dot{y}_{000} = \dot{z}_{000} = 0$ as a constant. This means that $T_{000} = 0$, so we may add it to the total kinetic energy of the system (despite the $(0,0,0)$ atom not being part of the system):
+    $$\boxed{T = \frac{m}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\dot{x}_{ijk}^2 + \dot{y}_{ijk}^2 + \dot{z}_{ijk}^2\right)}$$
+    In what follows, we let $x_{000} = y_{000} = z_{000} = 0$ be constants. Then for a single spring along the $x$-axis connecting atoms $(i,j,k)$ and $(i+1,j,k)$, we have
+    \begin{align*}
+        U^x_{ijk} &= \frac{K}{2}\left(\abs{\mathbf{r}_{i+1,jk} - \mathbf{r}_{ijk}} - l_0\right)^2 \\
+        &= \frac{K}{2}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2
+    \end{align*}
+    Then the sum of kinetic energies amongst all the $x$-axis springs are
+    $$U^x = \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2$$
+    Applying isotropic symmetry yields analogous expressions in $y$ and $z$. Then the total kinetic energy $T = T^x + T^y + T^z$ (we neglect gravity in this problem) is
+    \begin{empheq}[box=\wfbox]{align*}
+        U &= \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2 \\
+        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-2}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2 \\
+        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2
+    \end{empheq}
+    Our Lagrangian is thus
+    \begin{empheq}[box=\wfbox]{align*}
+        \mathcal{L} &= \frac{m}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\dot{x}_{ijk}^2 + \dot{y}_{ijk}^2 + \dot{z}_{ijk}^2\right) \\
+        &- \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2 \\
+        &- \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-2}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2 \\
+        &- \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2
+    \end{empheq}
+
+    \subsubsection*{Part IV}
+    For convenience, let us introduce the antidelta
+    $$\delta'_{mn} = 1 - \delta_{mn}$$
+    Let us first obtain the equations for $x$. We shall then apply symmetry to obtain the equations for $y$ and $z$. Now for $(i,j,k) \neq (0,0,0)$ (this atom does not have any degrees of freedom),
+    $$\pderiv{\mathcal{L}}{\dot{x}_{ijk}} = m\dot{x}_{ijk} \: \therefore \: \deriv{}{t}\pderiv{\mathcal{L}}{\dot{x}_{ijk}} = m\ddot{x}_{ijk}$$
+    \begin{align*}
+        \pderiv{\mathcal{L}}{x_{ijk}} &= K\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)\\&\mathrel{\phantom{=}}\frac{(x_{i+1,j,k} - x_{ijk})}{\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2}}\delta'_{i,M-1} \\
+        &- K\left(\sqrt{(x_{ijk} - x_{i-1,j,k})^2 + (y_{ijk} - y_{i-1,j,k})^2 + (z_{ijk} - z_{i-1,j,k})^2} - l_0\right)\\&\mathrel{\phantom{=}}\frac{(x_{ijk} - x_{i-1,jk})}{\sqrt{(x_{ijk} - x_{i-1,j,k})^2 + (y_{ijk} - y_{i-1,j,k})^2 + (z_{ijk} - z_{i-1,j,k})^2}}\delta'_{i,0} \\
+        &+ K\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)\\&\mathrel{\phantom{=}}\frac{(x_{i,j+1,k} - x_{ijk})}{\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2}}\delta'_{j,N-1} \\
+        &- K\left(\sqrt{(x_{ijk} - x_{i,j-1,k})^2 + (y_{ijk} - y_{i,j-1,k})^2 + (z_{ijk} - z_{i,j-1,k})^2} - l_0\right)\\&\mathrel{\phantom{=}}\frac{(x_{ijk} - x_{i,j-1,k})}{\sqrt{(x_{ijk} - x_{i,j-1,k})^2 + (y_{ijk} - y_{i,j-1,k})^2 + (z_{ijk} - z_{i,j-1,k})^2}}\delta'_{j,0} \\
+        &+ K\left(\sqrt{(x_{i,j,k+1} - x_{ijk})^2 + (y_{i,j,k+1} - y_{ijk})^2 + (z_{i,j,k+1} - z_{ijk})^2} - l_0\right)\\&\mathrel{\phantom{=}}\frac{(x_{i,j,k+1} - x_{ijk})}{\sqrt{(x_{i,j,k+1} - x_{ijk})^2 + (y_{i,j,k+1} - y_{ijk})^2 + (z_{i,j,k+1} - z_{ijk})^2}}\delta'_{k,P-1} \\
+        &- K\left(\sqrt{(x_{ijk} - x_{i,j,k-1})^2 + (y_{ijk} - y_{i,j,k-1})^2 + (z_{ijk} - z_{i,j,k-1})^2} - l_0\right)\\&\mathrel{\phantom{=}}\frac{(x_{ijk} - x_{i,j,k-1})}{\sqrt{(x_{ijk} - x_{i,j,k-1})^2 + (y_{ijk} - y_{i,j,k-1})^2 + (z_{ijk} - z_{i,j,k-1})^2}}\delta'_{k,0}
+    \end{align*}
+    For further brevity, let us define
+    $$\lambda^x_{i:m,n} = \frac{x_{mjk} - x_{njk}}{\sqrt{(x_{mjk} - x_{njk})^2 + (y_{mjk} - y_{njk})^2 + (z_{mjk} - z_{njk})^2}}$$
+    We similarly define $\lambda^x_{j:m,n}$ and $\lambda^x_{k:m,n}$ substituting the $j$ and $k$ indices, respectively. Also define $\lambda^y$ and $\lambda^z$ to use $y$ and $z$ coordinates in the numerator instead. Then we simplify
+    \begin{align*}
+        \pderiv{\mathcal{L}}{x_{ijk}} &= K\left((x_{i+1,j,k} - x_{ijk}) - \lambda_{i:i+1,i}^xl_0\right)\delta'_{i,M-1} - K\left((x_{ijk} - x_{i-1,j,k}) - \lambda_{i:i,i-1}^xl_0\right)\delta'_{i,0} \\
+        &+ K\left((x_{i,j+1,k} - x_{ijk}) - \lambda_{j:j+1,j}^xl_0\right)\delta'_{j,N-1} - K\left((x_{ijk} - x_{i,j-1,k}) - \lambda_{j:j,j-1}^xl_0\right)\delta'_{j,0} \\
+        &+ K\left((x_{i,j,k+1} - x_{ijk}) - \lambda_{k:k+1,k}^xl_0\right)\delta'_{k,P-1} - K\left((x_{ijk} - x_{i,j,k-1}) - \lambda_{k:k,k-1}^xl_0\right)\delta'_{k,0}
+    \end{align*}
+    Applying symmetry to obtain the $y$ and $z$ equations, we obtain (for $(i,j,k) \neq (0,0,0)$)
+    \begin{empheq}[box=\wfbox]{align*}
+        m\ddot{x}_{ijk} &= K\left((x_{i+1,j,k} - x_{ijk}) - \lambda_{i:i+1,i}^xl_0\right)\delta'_{i,M-1} - K\left((x_{ijk} - x_{i-1,j,k}) - \lambda_{i:i,i-1}^xl_0\right)\delta'_{i,0} \\
+        &+ K\left((x_{i,j+1,k} - x_{ijk}) - \lambda_{j:j+1,j}^xl_0\right)\delta'_{j,N-1} - K\left((x_{ijk} - x_{i,j-1,k}) - \lambda_{j:j,j-1}^xl_0\right)\delta'_{j,0} \\
+        &+ K\left((x_{i,j,k+1} - x_{ijk}) - \lambda_{k:k+1,k}^xl_0\right)\delta'_{k,P-1} - K\left((x_{ijk} - x_{i,j,k-1}) - \lambda_{k:k,k-1}^xl_0\right)\delta'_{k,0} \\
+        m\ddot{y}_{ijk} &= K\left((y_{i+1,j,k} - y_{ijk}) - \lambda_{i:i+1,i}^yl_0\right)\delta'_{i,M-1} - K\left((y_{ijk} - y_{i-1,j,k}) - \lambda_{i:i,i-1}^yl_0\right)\delta'_{i,0} \\
+        &+ K\left((y_{i,j+1,k} - y_{ijk}) - \lambda_{j:j+1,j}^yl_0\right)\delta'_{j,N-1} - K\left((y_{ijk} - y_{i,j-1,k}) - \lambda_{j:j,j-1}^yl_0\right)\delta'_{j,0} \\
+        &+ K\left((y_{i,j,k+1} - y_{ijk}) - \lambda_{k:k+1,k}^yl_0\right)\delta'_{k,P-1} - K\left((y_{ijk} - y_{i,j,k-1}) - \lambda_{k:k,k-1}^yl_0\right)\delta'_{k,0} \\
+        m\ddot{z}_{ijk} &= K\left((z_{i+1,j,k} - z_{ijk}) - \lambda_{i:i+1,i}^zl_0\right)\delta'_{i,M-1} - K\left((z_{ijk} - z_{i-1,j,k}) - \lambda_{i:i,i-1}^zl_0\right)\delta'_{i,0} \\
+        &+ K\left((z_{i,j+1,k} - z_{ijk}) - \lambda_{j:j+1,j}^zl_0\right)\delta'_{j,N-1} - K\left((z_{ijk} - z_{i,j-1,k}) - \lambda_{j:j,j-1}^zl_0\right)\delta'_{j,0} \\
+        &+ K\left((z_{i,j,k+1} - z_{ijk}) - \lambda_{k:k+1,k}^zl_0\right)\delta'_{k,P-1} - K\left((z_{ijk} - z_{i,j,k-1}) - \lambda_{k:k,k-1}^zl_0\right)\delta'_{k,0}
+    \end{empheq}
+
+    \subsubsection*{Part V}
+    Now let us consider longitudinal acoustic wave (sound) propagation along the $x$-axis. That is, we consider wave propagation where $y_{ijk}$ and $z_{ijk}$ are not displaced from their equilibrium values. For example, we could have a hammer uniformly striking the $yz$ face of the prism opposite to the origin. The longitudinal wave propagation is therefore described by the longitudinal displacement (from equilibrium) $X_{ijk}$ of point $(i, j, k)$: $X_{ijk} = x_{ijk} - \tilde{x}_{ijk}$. We are focusing on the case where external acoustic stimuli are applied uniformly along $j$ and $k$ so that $X_{ijk}$ is constant in $j$ and $k$.\newline\newline
+    Simplify the $x$ EL equations, applying the simplification that $y_{ijk}$ and $z_{ijk}$ are not displaced. Rewrite these equations in terms of $X$. Also show that $\ddot{y}_{ijk}$ and $\ddot{z}_{ijk}$ are equal to zero in the EL equations (this ensures that if the system starts with $y_{ijk}$ and $z_{ijk}$ at rest for all $(i, j, k)$, $y_{ijk}$ and $z_{ijk}$ will remain unperturbed).
+
+    \subsubsection*{Part VI}
+    Turning now to the theory of finite differences, we may approximate the derivatives of a twice continuously differentiable function $f(x)$ in a mesh as
+    $$\deriv{f}{x}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) - f(x_i)}{\Delta x}, \; \nderiv{f}{x}{2}\bigg|_{x=x_i} \approx \frac{f(x_{i+1}) + f(x_{i-1}) - 2f(x_i)}{\left(\Delta x\right)^2}$$
+    for a given mesh size of $\Delta x$. We (you) will make use of the first approximation later. Of course, these finite differences have analogous formulae for partial derivatives.\newline\newline
+    Let us now concern ourselves with somehow differentiating $X_{ijk}$. As it stands, the equations appear to be finite difference equations, however $X_{ijk}$ this is not a function of $x$, $y$, and $z$. However, $X_{ijk}(t)$ is a discretization of some twice differentiable function $\tilde{X}(x, y, z, t)$, where the EL equations serve as the difference equations. We may interpret $X_{ijk}$ to be $\tilde{X}$ evaluated at the point where the $(i, j, k)$ atom's equilibrium location is. Because there are a very large number of atoms along each dimension in a macroscopic solid, the finite difference discretization is very accurate; that is, the values of $X_{ijk}$ will be approximately equal the actual values of $\tilde{X}$ (which is governed by the corresponding differential equation) evaluated at those points.\newline\newline
+    Express the equations obtained in \textbf{Part V} as a set of finite difference equations for $\tilde{X}$. What should the mesh spacing $\Delta x$ be?
+
+    \subsubsection*{Part VII}
+    As one of the most important equations in physics, the wave equation is
+    $$\npderiv{f}{t}{2} = c^2 \nabla^2 f$$
+    This represents the propagation of a quantity $f$ through space. The constant $c$ is known as the \textit{wave speed}; this represents the speed at which $f$ propagates through space. Notice that the set of equations obtained in \textbf{Part VI} is a \textit{pseudo}-discretization of the wave equation for $\tilde{X}$. \newline\newline
+    ``Undiscretize'' these equations to recover the wave equation for $\tilde{X}$. Longitudinal sound wave in a solid are hence carried through some continuous (in fact continuously twice differentiable) field $\tilde{X}$; at lattice points, this field is simply the longitudinal displacement of the corresponding atom. Now find the wave speed $c$ in terms of the quantities we have encountered thus far. The equations in \textbf{Part VI} represent a \textit{pseudo}-discretization of the wave equation; in fact, this is better than a typical finite difference discretization. Why is this the case (recall that finite difference discretizations are used to numerically compute the solutions to differential equations)?
+
+    \subsubsection*{Part VIII}
+    Let us take a detour now to the mechanics of materials. Consider a uniaxial deformation of the prism where the $yz$-face opposite to the origin is displaced by an amount $\delta$. In terms of generalized coordinates, we now constrain $x_{Mjk} = a + \delta$ for all $0 \leq j \leq N-1, 0 \leq k \leq P-1$ under the deformation. If initially the system was at rest (with no constraint on $x_{Mjk}$), and we take the system after the displacement to be at rest (this could be in steady state, where the oscillations of the atoms have been damped; for sound propagation we have neglected damping), then the \textit{elastic modulus} $E$ is defined to be the constant of proportionality such that the increase in energy per total (initial) volume is $\frac{1}{2}E\varepsilon^2$, where $\varepsilon = \frac{\delta}{a}$ is known as the \textit{strain} of the deformation (the elastic modulus is more commonly defined in terms of forces; in the context of Lagrangian mechanics, however, we shall continue to formulate phenomena in terms of generalized coordinates and energies). Finally, the density $\rho$ of a material is its mass per unit volume.\newline\newline
+    Express the speed of sound $c$ in the solid in terms of its macroscopic properties.
+
+    \subsubsection*{Part IX}
+    We have finally found the speed of longitudinal sound waves in a homogeneous isotropic elastic solid, albeit for the case of a rectangular prism. Our results, however, apply to any such prismatic solid. To finish off, as a bonus exercise let us consider the boundary conditions of the prism. The boundary condition for $\tilde{X}$ at $x = 0$ is already constrained to be
+    $$\tilde{X}(x=0, y, z, t) = 0$$
+    as we require the corner to be fixed at rest. Symmetry in $y$ and $z$ requires this to be the case for the entire $yz$ face. At the other end's $yz$ face, however, we are free to specify any boundary condition provided that it is symmetric in $y$ and $z$. For example, we may specify the Dirichlet boundary condition
+    $$\tilde{X}(x=a, y, z, t) = p$$
+    the mixed boundary condition
+    $$\pderiv{\tilde{X}}{x}\bigg|_{x=a} = q$$
+    or the Robin boundary condition
+    $$\alpha\tilde{X}(x=a, y, z, t) + \beta\pderiv{\tilde{X}}{x}\bigg|_{x=a} = \gamma$$
+    for $\alpha, \beta \neq 0$.\newline\newline
+    Physically speaking, what is happening to the $x = a$ face for the Dirichlet, mixed, and Robin boundary conditions, respectively? How do the constants $p, q, \alpha, \beta, \gamma$ relate to what is being applied to the $x = a$ face for each boundary condition? It may help to create ``ghost'' points $X_{M,j,k}$ and use the right finite difference introduced in \textbf{Part VI} for the first derivative.
+
+\end{flushleft}
+
+\end{document}
