@@ -272,7 +272,47 @@
     We have now accomplished our main objective in this problem: to determine the speed of sound in a solid in terms of its macroscopic properties.
 
     \subsubsection*{Part IX}
-    Final TODO
+    \underline{Dirichlet BCs}\\
+    Trivially, this corresponds to simply fixing the $x=a$ face at a certain $x$-coordinate $x=p$. Notice that $x_{M-1,j,k}$ are no longer degrees of freedom.\newline\newline
+    \underline{Mixed BCs}\\
+    Let us now introduce a ghost mesh point $X_M$ in discretizing $\tilde{X}$. Then we may rewrite
+    $$mX_{M-1} = -K(X_{M-1} - X_{M-2}) = K(X_{M} + X_{M-2} - 2X_{M-1}) - K(X_M - X_{M-1})$$
+    If we discretize
+    $$\deriv{\tilde{X}}{x}(x=a,y,z,t) = \frac{X_M - X_{M-1}}{l_0}$$
+    So in the case of mixed boundary conditions
+    $$mX_{M-1} = K(X_{M} + X_{M-2} - 2X_{M-1}) - Kl_0q$$
+    This means that the mixed boundary condition corresponds to a constant force $F$ being applied uniformly on the $x=a$ face. To see why, we first see that our potential energy has an additional terms $-fx_{M-1,j,k}$ for all $j$ and $k$ in bounds. Then the Lagrangian would have the terms $+fx_{M-1,j,k}$. Differentiating into the EL equations gives a $+f$ term:
+    $$mX_{M-1} = K(X_{M} + X_{M-2} - 2X_{M-1}) - Kl_0q + f$$
+    Here $f$ is the force applied on each atom. Uniform application of the force maintains $j$ and $k$ symmetry. It follows that $F = NPf$. Applying the discretization of $\npderiv{\tilde{X}}{t}{2} = c^2\npderiv{\tilde{X}}{x}{2}$ to the $M-1$ mesh point, we then have
+    $$mX_{M-1} = K(X_{M} + X_{M-2} - 2X_{M-1})$$
+    This means that $f = Kl_0q$. Then
+    $$F = NPKl_0q = \frac{K}{l_0}NPl_0^2q = Ebcq$$
+    $$\boxed{F = qEA}$$
+    \underline{Robin BCs}\\
+    In this case we have
+    \begin{align*}
+        \beta\deriv{\tilde{X}}{x}(x=a,y,z,t) &= \gamma - \alpha\tilde{X}(x=a,y,z,t) \\
+        \deriv{\tilde{X}}{x}(x=a,y,z,t) &= \frac{\gamma}{\beta} - \frac{\alpha}{\beta}\tilde{X}(x=a,y,z,t)
+    \end{align*}
+    Then
+    \begin{align*}
+        mX_{M-1} &= K(X_{M} + X_{M-2} - 2X_{M-1}) - K(X_M - X_{M-1}) \\
+        &= K(X_{M} + X_{M-2} - 2X_{M-1}) - Kl_0\left(\frac{\gamma}{\beta} - \frac{\alpha}{\beta}X_{M-1}\right) \\
+        &= K(X_{M} + X_{M-2} - 2X_{M-1}) + \frac{\alpha Kl_0}{\beta}\left(X_{M-1} - \frac{\gamma}{\alpha}\right)
+    \end{align*}
+    This corresponds to a spring of spring constant $\kappa$ and equilibrium length $L_0$ being uniformly applied to the $x=a$ face. Let $\kappa'$ be the effective spring constant on each atom. Then the potential energy gains a $+\frac{\kappa'}{2}\left(x_{M-1,j,k} - L_0\right)^2$ term. Conversely, the Lagrangian gains a $-\frac{\kappa'}{2}\left(x_{M-1,j,k} - L_0\right)^2$ term. So the EL equation for $x_{M-1} \to X_{M-1}$ gains a $-\kappa'\left(x_{M-1} - L_0\right)$ term (note the $j$ and $k$ symmetries being preserved):
+    $$mX_{M-1} = K(X_{M} + X_{M-2} - 2X_{M-1}) + \frac{\alpha Kl_0}{\beta}\left(X_{M-1} - \frac{\gamma}{\alpha}\right) - \kappa'\left(x_{M-1} - L_0\right)$$
+    It follows that $\kappa' = \frac{\alpha Kl_0}{\beta}$ and
+    $$\boxed{L_0 = \frac{\gamma}{\alpha}}$$
+    Of course, for the limiting case $\beta \to 0$ (in the direction of sign that agrees with $\alpha$) we have a fully rigid spring holding the face fixed at $x = \frac{\gamma}{\alpha}$ (we will see shortly that $\kappa$ is proportional to $\kappa'$); this agrees with our result for the Dirichlet condition that would be obtained. To relate $\kappa'$ with $\kappa$, we equate the spring energies taking across the entire $x=a$ face:
+    $$\frac{\kappa}{2} \left(x_{M-1} - L_0\right)^2 = \sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\frac{\kappa'}{2} \left(x_{M-1} - L_0\right)^2 = NP\frac{\kappa'}{2} \left(x_{M-1} - L_0\right)^2$$
+    This gives us $\kappa = NP\kappa'$. Thus
+    $$\kappa = NP\frac{\alpha Kl_0}{\beta} = \frac{\alpha}{\beta} \frac{K}{l_0} NPl_0^2 = \frac{\alpha}{\beta}EA$$
+    We box this as
+    $$\boxed{\kappa = \frac{\alpha}{\beta}EA}$$
+    Of course, $\alpha$ and $\beta$ must agree in sign for this spring to be stable. Then for the limiting case $\alpha \to 0$, we first rearrange the spring force to be
+    $$F = -\kappa\left(x_{M-1} - L_0\right) = \kappa L_0\left(1 - \frac{x_{M-1}}{L_0}\right) = \frac{\gamma}{\beta}EA\left(1 - \frac{x_{M-1}}{L_0}\right) = \frac{\gamma}{\beta}EA\left(1 - \frac{\alpha}{\gamma}x_{M-1}\right)$$
+    We see that as $\alpha \to 0$ we obtain $F = \frac{\gamma}{\beta}EA$, agreeing with our result for the mixed boundary condition. Interestingly, the sign of $\alpha$ need not agree with that of $\beta$ in the limit to recover this relationship.
 
 \end{flushleft}
 
