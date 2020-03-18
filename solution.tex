@@ -229,29 +229,50 @@
     $$\boxed{m\ddot{X}_{M-1} = -K\left(X_{M-1} - X_{M-2}\right)}$$
 
     \subsubsection*{Part VI}
-    For the interior points,
+    For the interior points, we rearrange the $X_i$ equation to get
+    $$\ddot{X}_i = \frac{K}{m}\left(X_{i+1} + X_{i-1} - 2X_i\right)$$
+    This equation looks similar to the second derivative difference equation. The mesh points are indexed at $i-1$, $i$, and $i+1$. Since $X_i$ describes the deviation from equilibrium at $\tilde{x}_i$, the mesh spacing must be the spacing in $\tilde{x}_i$. This is simply $l_0$. Thus,
+    $$\boxed{\Delta x = l_0}$$
+    Hence
+    $$\boxed{\ddot{X}_i = \frac{Kl_0^2}{m}\frac{X_{i+1} + X_{i-1} - 2X_i}{l_0^2}}$$
 
     \subsubsection*{Part VII}
-    As one of the most important equations in physics, the wave equation is
-    $$\npderiv{f}{t}{2} = c^2 \nabla^2 f$$
-    This represents the propagation of a quantity $f$ through space. The constant $c$ is known as the \textit{wave speed}; this represents the speed at which $f$ propagates through space. Notice that the set of equations obtained in \textbf{Part VI} is a \textit{pseudo}-discretization of the wave equation for $\tilde{X}$. \newline\newline
-    ``Undiscretize'' these equations to recover the wave equation for $\tilde{X}$. Longitudinal sound wave in a solid are hence carried through some continuous (in fact continuously twice differentiable) field $\tilde{X}$; at lattice points, this field is simply the longitudinal displacement of the corresponding atom. Now find the wave speed $c$ in terms of the quantities we have encountered thus far. The equations in \textbf{Part VI} represent a \textit{pseudo}-discretization of the wave equation; in fact, this is better than a typical finite difference discretization. Why is this the case (recall that finite difference discretizations are used to numerically compute the solutions to differential equations)?
+    The discrete equation corresponds to the differential equation
+    $$\npderiv{\tilde{X}}{t}{2} = \frac{Kl_0^2}{m}\npderiv{\tilde{X}}{x}{2}$$
+    Seeing that $X$ is constant in $j$ and $k$, we have $\tilde{X}$ be constant in $y$ and $z$. Then $\npderiv{\tilde{X}}{y}{2} = \npderiv{\tilde{X}}{z}{2} = 0$. This means that $\nabla^2 \tilde{X} = \npderiv{\tilde{X}}{t}{2}$. Hence
+    $$\boxed{\npderiv{\tilde{X}}{t}{2} = \frac{Kl_0^2}{m}\nabla^2\tilde{X}}$$
+    This gives $c^2 = \frac{Kl_0^2}{m}$. Thus
+    $$\boxed{c = l_0\sqrt{\frac{K}{m}}}$$
+    In numerical applications, time must be discretized as well. However, in our equations, time is a continuum. Therefore the discrete equations serve as a better approximation to the wave differential equation than a full discretization would.
 
     \subsubsection*{Part VIII}
-    Let us take a detour now to the mechanics of materials. Consider a uniaxial deformation of the prism where the $yz$-face opposite to the origin is displaced by an amount $\delta$. In terms of generalized coordinates, we now constrain $x_{Mjk} = a + \delta$ for all $0 \leq j \leq N-1, 0 \leq k \leq P-1$ under the deformation. If initially the system was at rest (with no constraint on $x_{Mjk}$), and we take the system after the displacement to be at rest (this could be in steady state, where the oscillations of the atoms have been damped; for sound propagation we have neglected damping), then the \textit{elastic modulus} $E$ is defined to be the constant of proportionality such that the increase in energy per total (initial) volume is $\frac{1}{2}E\varepsilon^2$, where $\varepsilon = \frac{\delta}{a}$ is known as the \textit{strain} of the deformation (the elastic modulus is more commonly defined in terms of forces; in the context of Lagrangian mechanics, however, we shall continue to formulate phenomena in terms of generalized coordinates and energies). Finally, the density $\rho$ of a material is its mass per unit volume.\newline\newline
-    Express the speed of sound $c$ in the solid in terms of its macroscopic properties.
+    Notice that $j$ and $k$ symmetries are preserved when we deform $x_{Mjk}$ by $\delta$. Then we use the equations for $X_i$ from \textbf{Part V}. At rest, $\ddot{X}_i = \ddot{x}_i = 0$. We then have the equations
+    $$X_{i+1} + X_{i-1} - 2X_i = 0$$
+    for $1 \leq i \leq M-2$. Moreover, we have the boundary conditions $X_0 = 0$ and $X_{M-1} = \delta$. We may rearrange the $X_i$ equation to
+    $$X_i = \frac{X_{i+1} + X_{i-1}}{2}$$
+    That is, $X_i$ is the average value of its two neighbours. We now have $M$ linear equations in $M$ unknowns (two equations are from the boundary conditions). The coefficient matrix is tridiagonal and therefore invertible. Hence there is a unique solution to these equations. By inspection, the solution is
+    $$X_i = \frac{i}{M} \delta$$
+    for $0 \leq i \leq M-1$. Notice that under $j$ and $k$ symmetry, the potential energy simplifies to
+    \begin{align*}
+        U &= \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left((x_{i+1,j,k} - x_{ijk}) - l_0\right)^2 = \frac{NPK}{2}\sum_{i=0}^{M-2}\left((x_{i+1} - x_{i}) - l_0\right)^2 \\
+        &= \frac{NPK}{2}\sum_{i=0}^{M-2}\left((X_{i+1} + (i+1)l_0 - X_{i} - il_0) - l_0\right)^2 = \frac{NPK}{2}\sum_{i=0}^{M-2}\left(X_{i+1} - X_{i}\right)^2 \\
+        &= \frac{NPK}{2}\sum_{i=0}^{M-2}\left(\frac{\delta}{M}\right)^2 = \frac{(M-1)NPK\delta^2}{2M^2} \approx \frac{NPK\delta^2}{2M}
+    \end{align*}
+    Noting that $U = 0$ when there is no deformation ($\delta = 0$), we equate
+    \begin{align*}
+        \frac{1}{2}E\epsilon^2 = \frac{1}{2}E\frac{\delta^2}{a^2} &= \frac{\Delta U}{V} = \frac{U}{abc} = \frac{1}{MNPl_0^3} \frac{NPK\delta^2}{2M} \\
+        E\frac{1}{a^2} = E\frac{1}{M^2l_0^2} &= \frac{1}{MNPl_0^3} \frac{NPK}{M} \\
+        E &= \frac{1}{MNPl_0^3} MNPKl_0^2 = \frac{K}{l_0}
+    \end{align*}
+    Meanwhile, for (average) density we have
+    $$\rho = \frac{m_{total}}{V} = \frac{MNPm}{MNPl_0^3} = \frac{m}{l_0^3}$$
+    We now have $K = El_0$ and $m = \rho l_0^3$. Then
+    $$c = l_0\sqrt{\frac{K}{m}} = l_0\sqrt{\frac{El_0}{\rho l_0^3}} = \sqrt{\frac{E}{\rho l_0^2}}$$
+    $$\boxed{c = \sqrt{\frac{E}{\rho}}}$$
+    We have now accomplished our main objective in this problem: to determine the speed of sound in a solid in terms of its macroscopic properties.
 
     \subsubsection*{Part IX}
-    We have finally found the speed of longitudinal sound waves in a homogeneous isotropic elastic solid, albeit for the case of a rectangular prism. Our results, however, apply to any such prismatic solid. To finish off, as a bonus exercise let us consider the boundary conditions of the prism. The boundary condition for $\tilde{X}$ at $x = 0$ is already constrained to be
-    $$\tilde{X}(x=0, y, z, t) = 0$$
-    as we require the corner to be fixed at rest. Symmetry in $y$ and $z$ requires this to be the case for the entire $yz$ face. At the other end's $yz$ face, however, we are free to specify any boundary condition provided that it is symmetric in $y$ and $z$. For example, we may specify the Dirichlet boundary condition
-    $$\tilde{X}(x=a, y, z, t) = p$$
-    the mixed boundary condition
-    $$\pderiv{\tilde{X}}{x}\bigg|_{x=a} = q$$
-    or the Robin boundary condition
-    $$\alpha\tilde{X}(x=a, y, z, t) + \beta\pderiv{\tilde{X}}{x}\bigg|_{x=a} = \gamma$$
-    for $\alpha, \beta \neq 0$.\newline\newline
-    Physically speaking, what is happening to the $x = a$ face for the Dirichlet, mixed, and Robin boundary conditions, respectively? How do the constants $p, q, \alpha, \beta, \gamma$ relate to what is being applied to the $x = a$ face for each boundary condition? It may help to create ``ghost'' points $X_{M,j,k}$ and use the right finite difference introduced in \textbf{Part VI} for the first derivative.
+    Final TODO
 
 \end{flushleft}
 
