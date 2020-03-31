@@ -117,7 +117,7 @@
     \subsubsection*{Part II}
     The equilibrium position of atom $(i,j,k)$ is
     $$\boxed{\left(\tilde{x}_{ijk}, \tilde{y}_{ijk}, \tilde{z}_{ijk}\right) = \left(il_0, jl_0, kl_0\right)}$$
-    If we take the prism to be bounded by the point atoms, then the dimensions would be $(a,b,c) = ((M-1)l_0,(N-1)l_0,(P-1)l_0)$. Quasi-philosophically, we could, however, argue that the prism extends a bit beyond the boundary atoms; no external body can be pushed right against the boundary atoms as that would require an infinite amount of energy (the bond energy diverges to infinity as bond distance approaches zero). Regardless, this all occurs on the $l_0$ scale, which is small compared to the $(a,b,c)$ scale. Hence we simply assert
+    If we take the prism to be bounded by the point atoms, then the dimensions would be $(a,b,c) = ((M-1)l_0,(N-1)l_0,(P-1)l_0)$. Quasi-philosophically, we could, however, argue that the prism extends a bit beyond the boundary atoms; no external body can be pushed right against the boundary atoms as that would require an infinite amount of energy (the bond energy diverges to infinity as bond distance approaches zero). Regardless, this all occurs on the $l_0$ scale, which is small compared to the $(a,b,c)$ scale. Hence we simply approximate
     $$\boxed{(a,b,c) \approx (Ml_0,Nl_0,Pl_0)}$$
 
     \subsubsection*{Part III}
@@ -136,14 +136,14 @@
     \begin{empheq}[box=\wfbox]{align*}
         U &= \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2 \\
         &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-2}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2 \\
-        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2
+        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j,k+1} - x_{ijk})^2 + (y_{i,j,k+1} - y_{ijk})^2 + (z_{i,j,k+1} - z_{ijk})^2} - l_0\right)^2
     \end{empheq}
     Our Lagrangian is thus
     \begin{empheq}[box=\wfbox]{align*}
         \mathcal{L} &= \frac{m}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\dot{x}_{ijk}^2 + \dot{y}_{ijk}^2 + \dot{z}_{ijk}^2\right) \\
         &- \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2 \\
         &- \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-2}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2 \\
-        &- \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2
+        &- \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j,k+1} - x_{ijk})^2 + (y_{i,j,k+1} - y_{ijk})^2 + (z_{i,j,k+1} - z_{ijk})^2} - l_0\right)^2
     \end{empheq}
     As we will see in \textbf{Part IV}, $\pderiv{\mathcal{L}}{x_{ijk}} = m\dot{x}_{ijk}$, $\pderiv{\mathcal{L}}{y_{ijk}} = m\dot{y}_{ijk}$, and $\pderiv{\mathcal{L}}{z_{ijk}} = m\dot{z}_{ijk}$ are in general nonzero. Hence momenta are generally not conserved in this system. However, notice that the Lagrangian is time invariant: $\pderiv{\mathcal{L}}{t} = 0$. Thus energy is conserved.
     \begin{align*}
@@ -156,13 +156,13 @@
         E &= \frac{m}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\dot{x}_{ijk}^2 + \dot{y}_{ijk}^2 + \dot{z}_{ijk}^2\right) \\
         &+ \frac{K}{2}\sum_{i=0}^{M-2}\sum_{j=0}^{N-1}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)^2 \\
         &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-2}\sum_{k=0}^{P-1}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2 \\
-        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j+1,k} - x_{ijk})^2 + (y_{i,j+1,k} - y_{ijk})^2 + (z_{i,j+1,k} - z_{ijk})^2} - l_0\right)^2
+        &+ \frac{K}{2}\sum_{i=0}^{M-1}\sum_{j=0}^{N-1}\sum_{k=0}^{P-2}\left(\sqrt{(x_{i,j,k+1} - x_{ijk})^2 + (y_{i,j,k+1} - y_{ijk})^2 + (z_{i,j,k+1} - z_{ijk})^2} - l_0\right)^2
     \end{empheq}
 
     \subsubsection*{Part IV}
     For convenience, let us introduce the antidelta
     $$\delta'_{mn} = 1 - \delta_{mn}$$
-    Let us first obtain the equations for $x$. We shall then apply symmetry to obtain the equations for $y$ and $z$. Now for $(i,j,k) \neq (0,0,0)$ (this atom does not have any degrees of freedom),
+    Let us first obtain the equations for $x$. We shall then apply symmetry to obtain the equations for $y$ and $z$. Now for $(i,j,k) \neq (0,0,0)$ (the corner atom does not have any degrees of freedom),
     $$\pderiv{\mathcal{L}}{\dot{x}_{ijk}} = m\dot{x}_{ijk} \: \therefore \: \deriv{}{t}\pderiv{\mathcal{L}}{\dot{x}_{ijk}} = m\ddot{x}_{ijk}$$
     \begin{align*}
         \pderiv{\mathcal{L}}{x_{ijk}} &= K\left(\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2} - l_0\right)\\&\mathrel{\phantom{=}}\frac{(x_{i+1,j,k} - x_{ijk})}{\sqrt{(x_{i+1,j,k} - x_{ijk})^2 + (y_{i+1,j,k} - y_{ijk})^2 + (z_{i+1,j,k} - z_{ijk})^2}}\delta'_{i,M-1} \\
@@ -260,16 +260,16 @@
     \end{align*}
     Noting that $U = 0$ when there is no deformation ($\delta = 0$), we equate
     \begin{align*}
-        \frac{1}{2}E\epsilon^2 = \frac{1}{2}E\frac{\delta^2}{a^2} &= \frac{\Delta U}{V} = \frac{U}{abc} = \frac{1}{MNPl_0^3} \frac{NPK\delta^2}{2M} \\
+        \frac{1}{2}E\varepsilon^2 = \frac{1}{2}E\frac{\delta^2}{a^2} &= \frac{\Delta U}{V} = \frac{U}{abc} = \frac{1}{MNPl_0^3} \frac{NPK\delta^2}{2M} \\
         E\frac{1}{a^2} = E\frac{1}{M^2l_0^2} &= \frac{1}{MNPl_0^3} \frac{NPK}{M} \\
         E &= \frac{1}{MNPl_0^3} MNPKl_0^2 = \frac{K}{l_0}
     \end{align*}
     Meanwhile, for (average) density we have
     $$\rho = \frac{m_{total}}{V} = \frac{MNPm}{MNPl_0^3} = \frac{m}{l_0^3}$$
     We now have $K = El_0$ and $m = \rho l_0^3$. Then
-    $$c = l_0\sqrt{\frac{K}{m}} = l_0\sqrt{\frac{El_0}{\rho l_0^3}} = \sqrt{\frac{E}{\rho l_0^2}}$$
+    $$c = l_0\sqrt{\frac{K}{m}} = l_0\sqrt{\frac{El_0}{\rho l_0^3}} = l_0\sqrt{\frac{E}{\rho l_0^2}}$$
     $$\boxed{c = \sqrt{\frac{E}{\rho}}}$$
-    We have now accomplished our main objective in this problem: to determine the speed of sound in a solid in terms of its macroscopic properties.
+    We have now accomplished our main objective in this problem: to determine the speed of sound in a solid in terms of its macroscopic properties. This is indeed an accurate expression for the speed of sound in a homogeneous linear solid; in terms of material properties, our assumption of invariance in $y$ and $z$ implies a material of zero Poisson ratio.
 
     \subsubsection*{Part IX}
     \underline{Dirichlet BCs}\\
@@ -278,7 +278,7 @@
     Let us now introduce a ghost mesh point $X_M$ in discretizing $\tilde{X}$. Then we may rewrite
     $$mX_{M-1} = -K(X_{M-1} - X_{M-2}) = K(X_{M} + X_{M-2} - 2X_{M-1}) - K(X_M - X_{M-1})$$
     If we discretize
-    $$\deriv{\tilde{X}}{x}(x=a,y,z,t) = \frac{X_M - X_{M-1}}{l_0}$$
+    $$\pderiv{\tilde{X}}{x}(x=a,y,z,t) = \frac{X_M - X_{M-1}}{l_0}$$
     So in the case of mixed boundary conditions
     $$mX_{M-1} = K(X_{M} + X_{M-2} - 2X_{M-1}) - Kl_0q$$
     This means that the mixed boundary condition corresponds to a constant force $F$ being applied uniformly on the $x=a$ face. To see why, we first see that our potential energy has an additional terms $-fx_{M-1,j,k}$ for all $j$ and $k$ in bounds. Then the Lagrangian would have the terms $+fx_{M-1,j,k}$. Differentiating into the EL equations gives a $+f$ term:
@@ -288,6 +288,7 @@
     This means that $f = Kl_0q$. Then
     $$F = NPKl_0q = \frac{K}{l_0}NPl_0^2q = Ebcq$$
     $$\boxed{F = qEA}$$
+    where $A = bc$ is the cross-sectional area of the solid. In fact, under a Newtonian formalism, we have $\varepsilon = \frac{\sigma}{E} = \frac{F}{EA}$. This suggests that $q$ is the applied strain on the solid. Geometrically, we would indeed expect $\pderiv{\tilde{X}}{x}\big|_{x=a}$ to be the overall strain of the bar under a linear strain profile.\newline\newline
     \underline{Robin BCs}\\
     In this case we have
     \begin{align*}
